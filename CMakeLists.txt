@@ -313,27 +313,6 @@ else()
   message(STATUS "Not building examples, CUDA not available")
 endif()
 
-if (WITH_CAFFE2 AND WITH_CUDA)
-   find_path(EIGEN_INCLUDE_DIR REQUIRED NAMES Eigen PATHS ${EIGEN_PREFIX} PATH_SUFFIXES include/eigen3 NO_DEFAULT_PATH)
-   message(STATUS "Found, EIGEN_INCLUDE_DIR: " ${EIGEN_INCLUDE_DIR})
-   find_library(CAFFE2_CPU_LIBRARY REQUIRED NAMES caffe2
-                PATHS ${CAFFE2_PREFIX} PATH_SUFFIXES lib lib64 NO_DEFAULT_PATH)
-   find_library(CAFFE2_GPU_LIBRARY REQUIRED NAMES caffe2_gpu
-                PATHS ${CAFFE2_PREFIX} PATH_SUFFIXES lib lib64 NO_DEFAULT_PATH)
-   set(CAFFE2_LIBRARIES ${CAFFE2_CPU_LIBRARY} ${CAFFE2_GPU_LIBRARY})
-   find_path(CAFFE2_INCLUDE_DIR REQUIRED NAMES caffe2 PATHS ${CAFFE2_PREFIX} PATH_SUFFIXES include NO_DEFAULT_PATH)
-   message(STATUS "Found, CAFFE2_INCLUDE_DIR: " ${CAFFE2_INCLUDE_DIR})
-
-   add_definitions(-DCAFFE2_USE_GOOGLE_GLOG)
-   include_directories(AFTER SYSTEM ${EIGEN_INCLUDE_DIR})
-   include_directories(AFTER SYSTEM ${CAFFE2_INCLUDE_DIR})
-   add_subdirectory(tc/c2)
-   add_subdirectory(tc/benchmarks)
-   add_subdirectory(test/caffe2)
-else()
-  message(STATUS "Not building benchmarks, caffe2 or CUDA not available")
-endif()
-
 if (WITH_BINDINGS)
   add_subdirectory(isl_interface)
 endif()

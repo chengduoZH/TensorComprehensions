@@ -28,7 +28,6 @@ CXX=${CXX:="`which g++`"}
 VERBOSE=${VERBOSE:=0}
 PYTHON=${PYTHON:="`which python3`"}
 PROTOC=${PROTOC:="`which protoc`"}
-WITH_CAFFE2=OFF
 BUILD_TYPE=Release
 
 export TC_DIR=$(pwd)
@@ -74,7 +73,6 @@ mkdir -p ${TC_DIR}/build
 pushd ${TC_DIR}/build
 
 VERBOSE=${VERBOSE} ${CMAKE_VERSION} \
-    -DWITH_CAFFE2=${WITH_CAFFE2} \
     -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
     -DPYTHON_EXECUTABLE=${PYTHON} \
     -DHALIDE_PREFIX=${INSTALL_PREFIX} \
