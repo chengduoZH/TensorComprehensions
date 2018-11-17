@@ -3,6 +3,8 @@ set -ex
 
 export TC_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+echo "${CLANG_PREFIX}"
+
 if ! test ${CLANG_PREFIX}; then
     echo 'Environment variable CLANG_PREFIX is required, please run export CLANG_PREFIX=$(llvm-config --prefix)'
     exit 1
@@ -35,7 +37,7 @@ mkdir -p ${INSTALL_PREFIX}
 
 echo "TC_DIR: " $TC_DIR
 echo "GCC_VER: " $GCC_VER
-BUILD_TYPE=${BUILD_TYPE:=Debug}
+BUILD_TYPE=${BUILD_TYPE:=Release}
 echo "Build Type: ${BUILD_TYPE}"
 
 mkdir -p ${TC_DIR}/build || exit 1
@@ -64,7 +66,7 @@ cmake -DWITH_CAFFE2=${WITH_CAFFE2} \
        -DCMAKE_C_COMPILER=${CC} \
        -DCMAKE_CXX_COMPILER=${CXX} .. || exit 1
 
-make -j"$(nproc)" -s || exit 1
-make install -j"$(nproc)" -s || exit 1
+#make -j"$(nproc)" -s || exit 1
+#make install -j"$(nproc)" -s || exit 1
 
 echo "Successfully installed TC"

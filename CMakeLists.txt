@@ -300,12 +300,12 @@ add_subdirectory(tc)
 # for non-CUDA mode (CUDA_INCLUDE_DIR and CUB_INCLUDE_DIR undefined error).
 # Once the core CPU mapper is stabilized we can worry about pybind, deactivate
 # conditionally for now
-if (WITH_CUDA)
-  add_subdirectory(tensor_comprehensions/pybinds)
-endif()
+#if (WITH_CUDA)
+#  add_subdirectory(tensor_comprehensions/pybinds)
+#endif()
 
 enable_testing()
-add_subdirectory(test)
+#add_subdirectory(test)
 
 if (WITH_CUDA)
   add_subdirectory(tc/examples)
