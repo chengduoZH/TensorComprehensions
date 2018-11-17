@@ -15,7 +15,6 @@ if ! test ${CONDA_PREFIX}; then
     exit 1
 fi
 
-PYTHON=${PYTHON:="`which python3`"}
 CC=${CC:="`which gcc`"}
 CXX=${CXX:="`which g++`"}
 
@@ -27,7 +26,6 @@ CUDNN_ROOT_DIR=${CUDNN_ROOT_DIR:=${CONDA_PREFIX}}
 CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH:=${CONDA_PREFIX}/lib/cmake}
 HALIDE_PREFIX=${HALIDE_PREFIX:=${CONDA_PREFIX}}
 EIGEN_PREFIX=${EIGEN_PREFIX:=${CONDA_PREFIX}}
-CAFFE2_PREFIX=${CAFFE2_PREFIX:=${CONDA_PREFIX}}
 
 THIRD_PARTY_INSTALL_PREFIX=${TC_DIR}/third-party-install
 
@@ -48,12 +46,10 @@ rm -Rf ${INSTALL_PREFIX}
 
 cmake  -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
        -DWITH_TAPIR=${WITH_TAPIR} \
-       -DPYTHON_EXECUTABLE=${PYTHON} \
        -DCMAKE_BUILD_TYPE=${BUILD_TYPE} \
        -DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH} \
        -DHALIDE_PREFIX=${HALIDE_PREFIX} \
        -DEIGEN_PREFIX=${EIGEN_PREFIX} \
-       -DCAFFE2_PREFIX=${CAFFE2_PREFIX} \
        -DTHIRD_PARTY_INSTALL_PREFIX=${THIRD_PARTY_INSTALL_PREFIX} \
        -DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} \
        -DCLANG_PREFIX=${CLANG_PREFIX} \
@@ -64,7 +60,5 @@ cmake  -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
        -DCMAKE_C_COMPILER=${CC} \
        -DCMAKE_CXX_COMPILER=${CXX} .. || exit 1
 
-#make -j"$(nproc)" -s || exit 1
-#make install -j"$(nproc)" -s || exit 1
 
 echo "Successfully installed TC"
