@@ -5,4 +5,5 @@ add_subdirectory(proto)
 add_subdirectory(version)
 add_subdirectory(core)
 add_subdirectory(autotuner)
-add_subdirectory(aten)
+#add_subdirectory(aten )
+ 

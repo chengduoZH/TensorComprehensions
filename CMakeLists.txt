@@ -200,12 +200,12 @@ link_directories(${LLVM_LIBDIR})
 # unreasonable
 ################################################################################
 # first find python path
-execute_process(COMMAND which python OUTPUT_VARIABLE __python OUTPUT_STRIP_TRAILING_WHITESPACE)
-message(STATUS "PYTHON output: \n${__python}")
+#execute_process(COMMAND which python OUTPUT_VARIABLE __python OUTPUT_STRIP_TRAILING_WHITESPACE)
+#message(STATUS "PYTHON output: \n${__python}")
 
 # run the import torch command, if torch is installed it returns 0 otherwise error
-execute_process(COMMAND "${__python}" "-c" "import torch;" RESULT_VARIABLE __torch_install OUTPUT_STRIP_TRAILING_WHITESPACE)
-message(STATUS "IMPORTING TORCH: \n${__torch_install}")
+#execute_process(COMMAND "${__python}" "-c" "import torch;" RESULT_VARIABLE __torch_install OUTPUT_STRIP_TRAILING_WHITESPACE)
+#message(STATUS "IMPORTING TORCH: \n${__torch_install}")
 
 # also get the site-packages path where conda installs pytorch
 execute_process(COMMAND "python" "-c"
@@ -213,12 +213,12 @@ execute_process(COMMAND "python" "-c"
     OUTPUT_VARIABLE PYTHON_SITE_PACKAGES OUTPUT_STRIP_TRAILING_WHITESPACE)
 message(STATUS "PYTHON site packages: \n${PYTHON_SITE_PACKAGES}")
 
-message(STATUS "TORCH INSTALLED, linking to ATen from PyTorch")
-set(ATEN_INCLUDE_DIR "${PYTHON_SITE_PACKAGES}/torch/lib/include")
-include_directories(AFTER ${ATEN_INCLUDE_DIR})
-find_library(ATEN_LIBRARIES NAMES libATen.so PATHS ${PYTHON_SITE_PACKAGES}/torch/lib NO_DEFAULT_PATH)
-link_directories("${PYTHON_SITE_PACKAGES}/../../")
-message(STATUS "Found ATen.so file: ${ATEN_LIBRARIES}")
+#message(STATUS "TORCH INSTALLED, linking to ATen from PyTorch")
+#set(ATEN_INCLUDE_DIR "${PYTHON_SITE_PACKAGES}/torch/lib/include")
+#include_directories(AFTER ${ATEN_INCLUDE_DIR})
+#find_library(ATEN_LIBRARIES NAMES libATen.so PATHS ${PYTHON_SITE_PACKAGES}/torch/lib NO_DEFAULT_PATH)
+#link_directories("${PYTHON_SITE_PACKAGES}/../../")
+#message(STATUS "Found ATen.so file: ${ATEN_LIBRARIES}")
 
 ################################################################################
 # isl
